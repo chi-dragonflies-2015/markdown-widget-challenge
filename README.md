@@ -36,7 +36,7 @@ markdown text as the preview text.
 
 Introduce the Markdown converter.  You need not implement the _full_
 specification, but you should support `*`, `_`, and `**` for italics, italics,
-and bold, respectively. [See this link for examples.](https://guides.github.com/features/mastering-markdown/)
+and bold, respectively. [See this link for a hint of how you might translate the markdown.](http://assemble.io/docs/Cheatsheet-Markdown.html)
 
 ### Release 2
 
