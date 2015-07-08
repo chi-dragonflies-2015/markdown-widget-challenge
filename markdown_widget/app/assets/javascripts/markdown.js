@@ -9,12 +9,12 @@ KeyPress.prototype.convertEnter = function() {
 };
 
 KeyPress.prototype.convertItalics = function() {
-  this.content = this.content.replace(/\*([\w\s]+)\*/gm, '<i>$1</i>')
-  this.content = this.content.replace(/_([\w\s]+)_/gm, '<i>$1</i>')
+  this.content = this.content.replace(/\*([^*_]+)\*/gm, '<i>$1</i>')
+  this.content = this.content.replace(/_([^*_]+)_/gm, '<i>$1</i>')
 };
 
 KeyPress.prototype.convertBold = function() {
-  this.content = this.content.replace(/\*\*([\w\s]+)\*\*/gm, '<b>$1</b>')
+  this.content = this.content.replace(/\*\*([^*_]+)\*\*/gm, '<b>$1</b>')
 };
 
 KeyPress.prototype.convertHTML = function() {
