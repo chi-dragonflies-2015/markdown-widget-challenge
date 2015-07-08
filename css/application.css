@@ -3,3 +3,16 @@
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
+
+#container-left {
+  text-align: center;
+  float:left;
+  width: 50%;
+  border-right: 2px black solid;
+}
+
+#container-right {
+  text-align: center;
+  float:right;
+  width: 50%;
+}
