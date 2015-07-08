@@ -16,3 +16,7 @@
   float:right;
   width: 50%;
 }
+
+#output {
+  text-align: left;
+}

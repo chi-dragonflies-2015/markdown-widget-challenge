@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,13 +7,18 @@
     <link rel="stylesheet" href="css/application.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="js/application.js"></script>
+    <script src="node_modules/markdown/lib/markdown.js"></script>
   </head>
   <body>
     <div id="container-left">
       <h1>Text-y side</h1>
+      <textarea id="input" cols="50" rows="4"></textarea>
     </div>
     <div id="container-right">
       <h1>Markdown-y side</h1>
+      <div id="output">
+
+      </div>
     </div>
   </body>
 </html>
