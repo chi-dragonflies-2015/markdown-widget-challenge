@@ -2,32 +2,33 @@
 
 function MarkdownModel() {
   this.markdownHash = {
-    '**': function(word) {return "<h2>" + word + "</h2"; }, 
-    '*': function(word) { return "<h1>" + word + "</h1>";},
-    '_': function(word) { return "<i>" + word + "</i>"}
+    '###': function(word) {return "<h3>" + word.replace(/###/g,"") + "</h3"; }, 
+    '##': function(word) {return "<h2>" + word.replace(/##/g,"") + "</h2"; }, 
+    '#': function(word) { return "<h1>" + word.replace(/#/g,"") + "</h1>";},
+    '_': function(word) { return "<i>" + word.replace("_","") + "</i>"}
   };
 }
 
 MarkdownModel.prototype.convertWordToMarkdown = function(word){
   var markdownNotation = this.checkWordForMarkdownNotation(word)
   if(markdownNotation) {
-    var markdownConverter = this.markdownHash["markdownNotation"]
+    var markdownConverter = this.markdownHash[markdownNotation[0]]
     return markdownConverter(word)
   } else {
-    return "<p>" + word + "</p>"
+    return word
   }
 };
 
 MarkdownModel.prototype.checkWordForMarkdownNotation = function(word) {
-  var regex = /([*]+)/g;
-  var markdown = word.replace(regex,"$1")
+  var regex = /([#]+)/g;
+  var markdown = word.match(regex);
   return markdown
 }
 
 MarkdownModel.prototype.convertTextToMarkdown = function(textarea) {
-  var words = textarea.split(' ')
+  var words = textarea.trim().split(' ')
 
-  for(var i = 0; i <= words.length; i++){ 
+  for(var i = 0; i <= words.length - 1; i++){ 
     words[i] = this.convertWordToMarkdown(words[i])
   };
 
@@ -50,7 +51,7 @@ MarkdownController.prototype.getTextFromUser = function(){
 };
 
 MarkdownController.prototype.placeTextInMarkDownBox = function(html){
-  $('#markdown-text').val(html);
+  MarkdownView.previewArea().html(html);
 };
 
 MarkdownController.prototype.convertToMarkdown = function() {
@@ -59,13 +60,19 @@ MarkdownController.prototype.convertToMarkdown = function() {
   this.placeTextInMarkDownBox(markdownText);
 }
 
+// View
+var MarkdownView = {
+  inputArea: function() { return $('#user-text textarea'); },
+  previewArea: function() { return $('#markdown-text') }
+}
+
 // On Load
 
 $(function(){
   var model = new MarkdownModel()
   var controller = new MarkdownController(model,'view')
 
-  $('#user-text textarea').on('keyup',function(event){
+  MarkdownView.inputArea().on('keyup',function(event){
     controller.convertToMarkdown();
   });
 });
