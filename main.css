@@ -1,0 +1,16 @@
+textarea{
+  max-height: 700px;
+  max-width: 48%;
+  height: 700px;
+  width: 48%;
+}
+
+#text-field{
+  height: 700px;
+  width: 48%;
+  float: right;
+  display: inline-block;
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+}
