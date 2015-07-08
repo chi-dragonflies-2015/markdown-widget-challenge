@@ -5,7 +5,9 @@ function MarkdownModel() {
     '###': function(word) {return "<h3>" + word.replace(/###/g,"") + "</h3"; }, 
     '##': function(word) {return "<h2>" + word.replace(/##/g,"") + "</h2"; }, 
     '#': function(word) { return "<h1>" + word.replace(/#/g,"") + "</h1>";},
-    '_': function(word) { return "<i>" + word.replace("_","") + "</i>"}
+    '_': function(word) { return "<i>" + word.replace(/_/g,"") + "</i>"},
+    '**': function(word) { return "<strong>" + word.replace(/\*\*/g,"") + "</strong>"}
+
   };
 }
 
@@ -20,7 +22,7 @@ MarkdownModel.prototype.convertWordToMarkdown = function(word){
 };
 
 MarkdownModel.prototype.checkWordForMarkdownNotation = function(word) {
-  var regex = /([#]+)/g;
+  var regex = /([#*_]+)/g;
   var markdown = word.match(regex);
   return markdown
 }
@@ -39,9 +41,8 @@ MarkdownModel.prototype.convertTextToMarkdown = function(textarea) {
 
 //Controller
 
-function MarkdownController(model, view) {
+function MarkdownController(model) {
   this._model = model; 
-  this._view = view;
 
   var that = this;
 };
