@@ -3,11 +3,10 @@
 function MarkdownModel() {
   this.markdownHash = {
     '###': function(word) {return "<h3>" + word.replace(/###/g,"") + "</h3"; }, 
-    '##': function(word) {return "<h2>" + word.replace(/##/g,"") + "</h2"; }, 
+    '##': function(word) {return "<h2>" + word.replace(/##/g,"") + "</h2>"; }, 
     '#': function(word) { return "<h1>" + word.replace(/#/g,"") + "</h1>";},
     '_': function(word) { return "<i>" + word.replace(/_/g,"") + "</i>"},
     '**': function(word) { return "<strong>" + word.replace(/\*\*/g,"") + "</strong>"}
-
   };
 }
 
@@ -28,10 +27,12 @@ MarkdownModel.prototype.checkWordForMarkdownNotation = function(word) {
 }
 
 MarkdownModel.prototype.convertTextToMarkdown = function(textarea) {
-  var words = textarea.trim().split(' ')
+  var words = textarea.trim().replace(/\n/g,"<br> ").split(/[ ]/g)
 
   for(var i = 0; i <= words.length - 1; i++){ 
+    console.log("This is the word pre-conversion - " + words[i])
     words[i] = this.convertWordToMarkdown(words[i])
+    console.log("This is the word post-conversion - " + words[i])
   };
 
   return words.join(" ")
@@ -64,14 +65,14 @@ MarkdownController.prototype.convertToMarkdown = function() {
 // View
 var MarkdownView = {
   inputArea: function() { return $('#user-text textarea'); },
-  previewArea: function() { return $('#markdown-text') }
+  previewArea: function() { return $('#markdown-text'); }
 }
 
 // On Load
 
 $(function(){
   var model = new MarkdownModel()
-  var controller = new MarkdownController(model,'view')
+  var controller = new MarkdownController(model)
 
   MarkdownView.inputArea().on('keyup',function(event){
     controller.convertToMarkdown();
