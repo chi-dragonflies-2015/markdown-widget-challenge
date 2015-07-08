@@ -17,7 +17,6 @@ KeyPress.prototype.convertBold = function() {
   this.content = this.content.replace(/\*\*([\w\s]+)\*\*/gm, '<b>$1</b>')
 };
 
-
 KeyPress.prototype.convertHTML = function() {
   this.convertBold();
   this.convertItalics();
@@ -27,12 +26,9 @@ KeyPress.prototype.convertHTML = function() {
 KeyPress.prototype.replaceContent = function() {
   this.content = $('#markdown').val();
   this.convertHTML();
-  $('#preview').empty().append(this.content);
+  $('#preview').html(this.content);
 };
 
 KeyPress.prototype.initialize = function() {
   $('#markdown').on("keyup", this.replaceContent.bind(this));
 };
-
-// conditional for enter
-// conditional for special markdown characters
