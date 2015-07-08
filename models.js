@@ -4,6 +4,12 @@ function Output() {
   this.outputPlain = function(input) {
     this.preview().html(input);
   }
+  this.makeItalic = function(input){
+    var step1 = input.replace( /\*/,"<i>");
+    var step2 = step1.replace(/\*/,"</i>");
+    return step2;
+
+  }
 }
 
 
