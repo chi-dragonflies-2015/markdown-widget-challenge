@@ -1,0 +1,16 @@
+$(document).ready(function() {
+    $("#input").on("keypress", create_markdown);    
+});
+
+function create_markdown() {
+    $textarea = $(event.target);
+    console.log(event.keyCode);
+    console.log(String.fromCharCode(event.keyCode));
+    
+    console.log($("#input").text());
+    if (event.keyCode != 8) {
+        $("#display").append(String.fromCharCode(event.keyCode));
+    } else {
+        $("#display").remove();
+    }
+};
